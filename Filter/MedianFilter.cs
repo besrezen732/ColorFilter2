@@ -26,15 +26,16 @@ namespace Filter
                 int[] b = new int[m * n];
                
                 int k = 0; // счетчик для заполнения массивов цветом;
-                for (var i = x - dm; i < x + dm; i++)
+                for (var i = x - dm; i <= x + dm; i++)
                 {
-                    for (var j = y - dn; j < y + dn; j++)
+                    for (var j = y - dn; j <= y + dn; j++)
                     {
-                        k++;
+                        
                         var sourceColor = sourseImage.GetPixel(i, j);
                         r[k] = sourceColor.R;
                         g[k] = sourceColor.G;
                         b[k] = sourceColor.B;
+                        k++;
                     }
                 }
                 //Начинаем сортировку
@@ -44,7 +45,7 @@ namespace Filter
                 resultColor = Color.FromArgb((int)r[(m * n) / 2], (int)g[m * n / 2], (int)b[m * n / 2]);
 
             }
-
+            else
             resultColor = Color.FromArgb(sourseImage.GetPixel(x, y).R, sourseImage.GetPixel(x, y).G,
                     sourseImage.GetPixel(x, y).B);
             return resultColor;
