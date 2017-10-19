@@ -362,5 +362,24 @@ namespace Filter
                 }
             }
         }
+
+        private void медианныйФильтрToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (baseImage == null)
+                MessageBox.Show("Выберите изображение для обработки");
+            else
+            {
+                try
+                {
+                    Filters filter = new MedianFilter();
+                    backgroundWorker1.RunWorkerAsync(filter);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка запуска потока");
+                }
+            }
+        }
     }
 }
