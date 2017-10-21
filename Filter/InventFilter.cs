@@ -88,21 +88,13 @@ namespace Filter
     //доделать
     public class Glass : Filters
     {
+        var rand = new Random();
+
         protected override Color calculateNewPixelColor(Bitmap sourseImage, int x, int y)
         {
-            var rand = new Random();
-            var X = (int) (Math.Abs(x + (rand.Next(2) - 0.5) * 10));
-            var Y = (int) (Math.Abs(y + (rand.Next(2) - 0.5) * 10));
-            var xGp = X;
-            var yGp = Y;
-            if (X >= sourseImage.Width)
-            {
-                xGp = X - sourseImage.Width;
-            }
-            if (Y >= sourseImage.Height)
-            {
-                yGp = Y - sourseImage.Height;
-            }
+            var X = Clamp((int)(x + (rand.Next(2) - 0.5) * 10), 0, sourseImage.Width);
+            var Y = Clamp((int)(y + (rand.Next(2) - 0.5) * 10), 0, sourseImage.Height);
+            
             var sourceColor = sourseImage.GetPixel(xGp, yGp);
             var resultColor = Color.FromArgb(Clamp((int) (sourceColor.R), 0, 255),
                 Clamp((int) (sourceColor.G), 0, 255), Clamp((int) (sourceColor.B), 0, 255));
