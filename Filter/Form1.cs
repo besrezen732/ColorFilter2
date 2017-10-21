@@ -393,5 +393,22 @@ namespace Filter
 
         #endregion
 
+        private void серыйМирToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (baseImage == null)
+                MessageBox.Show("Выберите изображение для обработки");
+            else
+            {
+                try
+                {
+                    Filters filter = new GreyWorld();
+                    backgroundWorker1.RunWorkerAsync(filter);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка запуска потока");
+                }
+            }
+        }
     }
 }
