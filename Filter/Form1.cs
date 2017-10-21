@@ -127,23 +127,28 @@ namespace Filter
             InitializeComponent();
         }
 
+
+
+
         // прерывание потока
         private void btnCancel_Click(object sender, EventArgs e)
         {
             try
             {
                 backgroundWorker1.CancelAsync();
+
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show(@"Ошибка ручной останоки потока backgroundWorker1");
+                MessageBox.Show("Ошибка ручной останоки потока backgroundWorker1");
             }
+
         }
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
-                @"Данная программа выполнена в качестве зачетного задания лабораторной работы ""Фильтры"" командой студентов групп 456/457 Трусовым, Блиновом, Курниковым");
+                "Данная программа выполнена в качестве зачетного задания лабораторной работы \"Фильтры\" Трусовым Сергеем");
         }
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
@@ -206,6 +211,10 @@ namespace Filter
                 }
             }
         }
+
+
+        #endregion
+
 
         private void оттенкиСерогоToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -390,9 +399,6 @@ namespace Filter
             }
         }
 
-
-        #endregion
-
         private void серыйМирToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (baseImage == null)
@@ -401,7 +407,7 @@ namespace Filter
             {
                 try
                 {
-                    Filters filter = new GreyWorld();
+                    Filters filter = new GreyWorld(baseImage);
                     backgroundWorker1.RunWorkerAsync(filter);
                 }
                 catch (Exception ex)
@@ -410,5 +416,31 @@ namespace Filter
                 }
             }
         }
+
+        //private void матМорфологииToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    if (baseImage == null)
+        //        MessageBox.Show("Выберите изображение для обработки");
+        //    else
+        //    {
+        //        try
+        //        {
+        //            using (MophologyDialog dialog = new MophologyDialog())
+        //            {
+        //                if (dialog.ShowDialog() == DialogResult.OK)
+        //                {
+        //                    dialog.GetContainerControl.
+        //                }
+        //            }
+
+        //            Filters filter = new MathMorphology();
+        //            backgroundWorker1.RunWorkerAsync(filter);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("Ошибка запуска потока");
+        //        }
+        //    }
+        //}
     }
 }
