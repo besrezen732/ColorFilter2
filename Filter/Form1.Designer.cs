@@ -54,11 +54,8 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btnCancel = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
-<<<<<<< HEAD
             this.медианныйФильтрToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-=======
             this.линейнаяКоррекцияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
->>>>>>> Линейное_растяжение
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
@@ -113,11 +110,8 @@
             this.фильтрToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.точечныеToolStripMenuItem,
             this.матричныеToolStripMenuItem,
-<<<<<<< HEAD
-            this.медианныйФильтрToolStripMenuItem});
-=======
+            this.медианныйФильтрToolStripMenuItem,
             this.линейнаяКоррекцияToolStripMenuItem});
->>>>>>> Линейное_растяжение
             this.фильтрToolStripMenuItem.Name = "фильтрToolStripMenuItem";
             this.фильтрToolStripMenuItem.Size = new System.Drawing.Size(72, 24);
             this.фильтрToolStripMenuItem.Text = "Фильтр";
@@ -133,11 +127,7 @@
             this.волнаToolStripMenuItem,
             this.эффектСтеклаToolStripMenuItem});
             this.точечныеToolStripMenuItem.Name = "точечныеToolStripMenuItem";
-<<<<<<< HEAD
-            this.точечныеToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
-=======
-            this.точечныеToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
->>>>>>> Линейное_растяжение
+            this.точечныеToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.точечныеToolStripMenuItem.Text = "Точечные";
             // 
             // иверсияToolStripMenuItem
@@ -197,11 +187,7 @@
             this.резкостьToolStripMenuItem,
             this.тиснениеToolStripMenuItem});
             this.матричныеToolStripMenuItem.Name = "матричныеToolStripMenuItem";
-<<<<<<< HEAD
-            this.матричныеToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
-=======
-            this.матричныеToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
->>>>>>> Линейное_растяжение
+            this.матричныеToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.матричныеToolStripMenuItem.Text = "Матричные";
             // 
             // размытиеToolStripMenuItem
@@ -288,21 +274,19 @@
             this.pictureBox.TabIndex = 2;
             this.pictureBox.TabStop = false;
             // 
-<<<<<<< HEAD
             // медианныйФильтрToolStripMenuItem
             // 
             this.медианныйФильтрToolStripMenuItem.Name = "медианныйФильтрToolStripMenuItem";
             this.медианныйФильтрToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
             this.медианныйФильтрToolStripMenuItem.Text = "Медианный фильтр";
-            this.медианныйФильтрToolStripMenuItem.Click += new System.EventHandler(this.медианныйФильтрToolStripMenuItem_Click);
-=======
+            this.медианныйФильтрToolStripMenuItem.Click += new System.EventHandler(this.медианныйФильтрToolStripMenuItem_Click_1);
+            // 
             // линейнаяКоррекцияToolStripMenuItem
             // 
             this.линейнаяКоррекцияToolStripMenuItem.Name = "линейнаяКоррекцияToolStripMenuItem";
             this.линейнаяКоррекцияToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.линейнаяКоррекцияToolStripMenuItem.Text = "Линейная коррекция";
-            this.линейнаяКоррекцияToolStripMenuItem.Click += new System.EventHandler(this.линейнаяКоррекцияToolStripMenuItem_Click);
->>>>>>> Линейное_растяжение
+            this.линейнаяКоррекцияToolStripMenuItem.Click += new System.EventHandler(this.линейнаяКоррекцияToolStripMenuItem_Click_1);
             // 
             // FilterBaseForm
             // 
@@ -352,11 +336,8 @@
         private System.Windows.Forms.ToolStripMenuItem сдвигToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem волнаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem эффектСтеклаToolStripMenuItem;
-<<<<<<< HEAD
         private System.Windows.Forms.ToolStripMenuItem медианныйФильтрToolStripMenuItem;
-=======
         private System.Windows.Forms.ToolStripMenuItem линейнаяКоррекцияToolStripMenuItem;
->>>>>>> Линейное_растяжение
     }
 }
 

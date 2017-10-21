@@ -363,7 +363,7 @@ namespace Filter
             }
         }
 
-        private void линейнаяКоррекцияToolStripMenuItem_Click(object sender, EventArgs e)
+        private void медианныйФильтрToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             if (baseImage == null)
                 MessageBox.Show("Выберите изображение для обработки");
@@ -371,7 +371,7 @@ namespace Filter
             {
                 try
                 {
-                    Filters filter = new LinearStretching();
+                    Filters filter = new MedianFilter();
                     backgroundWorker1.RunWorkerAsync(filter);
                 }
                 catch (Exception ex)
@@ -381,16 +381,15 @@ namespace Filter
             }
         }
 
-        private void медианныйФильтрToolStripMenuItem_Click(object sender, EventArgs e)
+        private void линейнаяКоррекцияToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-
             if (baseImage == null)
                 MessageBox.Show("Выберите изображение для обработки");
             else
             {
                 try
                 {
-                    Filters filter = new MedianFilter();
+                    Filters filter = new LinearStretching();
                     backgroundWorker1.RunWorkerAsync(filter);
                 }
                 catch (Exception ex)
