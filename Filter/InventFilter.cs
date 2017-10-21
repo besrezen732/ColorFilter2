@@ -38,7 +38,7 @@ namespace Filter
         }
     }
 
-    public class Jarkost : Filters
+    public class Brightness : Filters
     {
 
         protected override Color calculateNewPixelColor(Bitmap sourseImage, int x, int y)
@@ -71,14 +71,9 @@ namespace Filter
     {
         protected override Color calculateNewPixelColor(Bitmap sourseImage, int x, int y)
         {
-            var X = (int) (x + Math.Abs(20 * (Math.Sin((2 * 3.14 * y) / 60))));
-            var xGp = X;
-            var yGp = y;
-            if (X >= sourseImage.Width)
-            {
-                xGp = X - sourseImage.Width;
-            }
-            var sourceColor = sourseImage.GetPixel(xGp, yGp);
+            var X = Clamp((int) (x + 20 * (Math.Sin((2 * 3.14 * y) / 60))),0 , sourseImage.Width - 1);
+            
+            var sourceColor = sourseImage.GetPixel(X, y);
             var resultColor = Color.FromArgb(Clamp((int) (sourceColor.R), 0, 255),
                 Clamp((int) (sourceColor.G), 0, 255), Clamp((int) (sourceColor.B), 0, 255));
             return resultColor;
