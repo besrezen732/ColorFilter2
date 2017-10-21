@@ -262,7 +262,7 @@ namespace Filter
             {
                 try
                 {
-                    Filters filter = new Jarkost();
+                    Filters filter = new Brightness();
 
                     backgroundWorker1.RunWorkerAsync(filter);
                 }

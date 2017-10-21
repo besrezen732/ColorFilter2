@@ -127,7 +127,7 @@
             this.волнаToolStripMenuItem,
             this.эффектСтеклаToolStripMenuItem});
             this.точечныеToolStripMenuItem.Name = "точечныеToolStripMenuItem";
-            this.точечныеToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.точечныеToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.точечныеToolStripMenuItem.Text = "Точечные";
             // 
             // иверсияToolStripMenuItem
@@ -155,7 +155,7 @@
             // 
             this.jarcostToolStripMenuItem.Name = "jarcostToolStripMenuItem";
             this.jarcostToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
-            this.jarcostToolStripMenuItem.Text = "Jarcost";
+            this.jarcostToolStripMenuItem.Text = "Яркость";
             this.jarcostToolStripMenuItem.Click += new System.EventHandler(this.jarcostToolStripMenuItem_Click);
             // 
             // сдвигToolStripMenuItem
