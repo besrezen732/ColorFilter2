@@ -8,6 +8,8 @@ namespace Filter
 
     public partial class FilterBaseForm : Form
     {
+        Bitmap baseImage;
+
         #region //обработчик потока
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -23,7 +25,7 @@ namespace Filter
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка вackgroundWorker1_DoWork");
+                MessageBox.Show("Ошибка вackgroundWorker1_DoWork\n" + ex.TargetSite + " " + ex.Message);
             }
         }
 
@@ -119,16 +121,11 @@ namespace Filter
 
         #endregion
 
-
-        Bitmap baseImage;
-
+        //Constructor
         public FilterBaseForm()
         {
             InitializeComponent();
         }
-
-
-
 
         // прерывание потока
         private void btnCancel_Click(object sender, EventArgs e)
@@ -153,12 +150,12 @@ namespace Filter
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //тут должен быть выход из программы, но мне лень
+            this.Dispose();
         }
 
         #region //выполнение фильтров
 
-        private void иверсияToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Filtering(Filters filter, EventArgs e)
         {
             if (baseImage == null)
                 MessageBox.Show("Выберите изображение для обработки");
@@ -166,7 +163,6 @@ namespace Filter
             {
                 try
                 {
-                    Filters filter = new InventFilter();
                     backgroundWorker1.RunWorkerAsync(filter);
                 }
                 catch (Exception ex)
@@ -174,273 +170,101 @@ namespace Filter
                     MessageBox.Show("Ошибка запуска потока");
                 }
             }
+        }
+        
+
+        private void иверсияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filtering(new InventFilter(), e);
         }
 
         private void размытиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (baseImage == null)
-                MessageBox.Show("Выберите изображение для обработки");
-            else
-            {
-                try
-                {
-                    Filters filter = new BLurFilter();
-                    backgroundWorker1.RunWorkerAsync(filter);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка запуска потока");
-                }
-            }
+            Filtering(new BLurFilter(), e);
         }
 
         private void размытиеПоГаусссуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (baseImage == null)
-                MessageBox.Show("Выберите изображение для обработки");
-            else
-            {
-                try
-                {
-                    Filters filter = new GaussianFilter();
-                    backgroundWorker1.RunWorkerAsync(filter);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка запуска потока");
-                }
-            }
+            Filtering(new GaussianFilter(), e);
+
+        }
+
+        private void оттенкиСерогоToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filtering(new GreyFilter(), e);
+        }
+
+        private void сепияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filtering(new SepiaFilter(), e);
+            
+        }
+
+        private void jarcostToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filtering(new Brightness(), e);
+        }
+
+        private void резкостьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filtering(new SharpnessFilter(), e);
+        }
+
+        private void тиснениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filtering(new EmbossingFilter(), e);
+        }
+
+        private void сдвигToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filtering(new Shift(), e);
+        }
+
+        private void волнаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filtering(new Wave(), e);
+        }
+
+        private void эффектСтеклаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filtering(new Glass(), e);
+        }
+
+        private void линейнаяКоррекцияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filtering(new LinearStretching(), e);
+        }
+
+        private void медианныйФильтрToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filtering(new MedianFilter(), e);
         }
 
 
         #endregion
 
-
-        private void оттенкиСерогоToolStripMenuItem_Click(object sender, EventArgs e)
+        private void расширениеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (baseImage == null)
-                MessageBox.Show("Выберите изображение для обработки");
-            else
+            if (baseImage != null)
             {
-                try
+                DialogForm dialog = new DialogForm();
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    Filters filter = new GreyFilter();
-                    backgroundWorker1.RunWorkerAsync(filter);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка запуска потока");
+                    Filtering(new Dilation(dialog.GetMatrix()), e);
                 }
             }
         }
 
-        private void сепияToolStripMenuItem_Click(object sender, EventArgs e)
+        private void эрозияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (baseImage == null)
-                MessageBox.Show("Выберите изображение для обработки");
-            else
+            if (baseImage != null)
             {
-                try
+                DialogForm dialog = new DialogForm();
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-
-                    Filters filter = new SepiaFilter();
-
-                    backgroundWorker1.RunWorkerAsync(filter);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка запуска потока");
+                    Filtering(new Erosion(dialog.GetMatrix()), e);
                 }
             }
         }
-
-        private void jarcostToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (baseImage == null)
-                MessageBox.Show("Выберите изображение для обработки");
-            else
-            {
-                try
-                {
-                    Filters filter = new Brightness();
-
-                    backgroundWorker1.RunWorkerAsync(filter);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка запуска потока");
-                }
-            }
-        }
-
-        private void резкостьToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (baseImage == null)
-                MessageBox.Show("Выберите изображение для обработки");
-            else
-            {
-                try
-                {
-                    Filters filter = new SharpnessFilter();
-                    backgroundWorker1.RunWorkerAsync(filter);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка запуска потока");
-                }
-            }
-        }
-
-        private void тиснениеToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (baseImage == null)
-                MessageBox.Show("Выберите изображение для обработки");
-            else
-            {
-                try
-                {
-                    Filters filter = new EmbossingFilter();
-                    backgroundWorker1.RunWorkerAsync(filter);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка запуска потока");
-                }
-            }
-        }
-
-        private void сдвигToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (baseImage == null)
-                MessageBox.Show("Выберите изображение для обработки");
-            else
-            {
-                try
-                {
-                    Filters filter = new Shift();
-                    backgroundWorker1.RunWorkerAsync(filter);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка запуска потока");
-                }
-            }
-        }
-
-        private void волнаToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (baseImage == null)
-                MessageBox.Show("Выберите изображение для обработки");
-            else
-            {
-                try
-                {
-                    Filters filter = new Wave();
-                    backgroundWorker1.RunWorkerAsync(filter);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка запуска потока");
-                }
-            }
-        }
-
-        private void эффектСтеклаToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (baseImage == null)
-                MessageBox.Show("Выберите изображение для обработки");
-            else
-            {
-                try
-                {
-                    Filters filter = new Glass();
-                    backgroundWorker1.RunWorkerAsync(filter);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка запуска потока");
-                }
-            }
-        }
-
-        private void медианныйФильтрToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            if (baseImage == null)
-                MessageBox.Show("Выберите изображение для обработки");
-            else
-            {
-                try
-                {
-                    Filters filter = new MedianFilter();
-                    backgroundWorker1.RunWorkerAsync(filter);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка запуска потока");
-                }
-            }
-        }
-
-        private void линейнаяКоррекцияToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            if (baseImage == null)
-                MessageBox.Show("Выберите изображение для обработки");
-            else
-            {
-                try
-                {
-                    Filters filter = new LinearStretching();
-                    backgroundWorker1.RunWorkerAsync(filter);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка запуска потока");
-                }
-            }
-        }
-
-        private void серыйМирToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (baseImage == null)
-                MessageBox.Show("Выберите изображение для обработки");
-            else
-            {
-                try
-                {
-                    Filters filter = new GreyWorld(baseImage);
-                    backgroundWorker1.RunWorkerAsync(filter);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка запуска потока");
-                }
-            }
-        }
-
-        //private void матМорфологииToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    if (baseImage == null)
-        //        MessageBox.Show("Выберите изображение для обработки");
-        //    else
-        //    {
-        //        try
-        //        {
-        //            using (MophologyDialog dialog = new MophologyDialog())
-        //            {
-        //                if (dialog.ShowDialog() == DialogResult.OK)
-        //                {
-        //                    dialog.GetContainerControl.
-        //                }
-        //            }
-
-        //            Filters filter = new MathMorphology();
-        //            backgroundWorker1.RunWorkerAsync(filter);
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show("Ошибка запуска потока");
-        //        }
-        //    }
-        //}
     }
 }

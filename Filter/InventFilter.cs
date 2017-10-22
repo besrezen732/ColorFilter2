@@ -7,8 +7,8 @@ namespace Filter
     {
         protected override Color calculateNewPixelColor(Bitmap sourseImage, int x, int y)
         {
-            var sourceColor = sourseImage.GetPixel(x, y);
-            var resultColor = Color.FromArgb(255 - sourceColor.R, 255 - sourceColor.G, 255 - sourceColor.B);
+            Color sourceColor = sourseImage.GetPixel(x, y);
+            Color resultColor = Color.FromArgb(255 - sourceColor.R, 255 - sourceColor.G, 255 - sourceColor.B);
             return resultColor;
         }
     }
@@ -17,9 +17,9 @@ namespace Filter
     {
         protected override Color calculateNewPixelColor(Bitmap sourseImage, int x, int y)
         {
-            var sourceColor = sourseImage.GetPixel(x, y);
-            var Intensity = 0.36 * sourceColor.R + 0.53 * sourceColor.G + 0.11 * sourceColor.B;
-            var resultColor = Color.FromArgb((int) Intensity, (int) Intensity, (int) Intensity);
+            Color sourceColor = sourseImage.GetPixel(x, y);
+            double Intensity = 0.36 * sourceColor.R + 0.53 * sourceColor.G + 0.11 * sourceColor.B;
+            Color resultColor = Color.FromArgb((int) Intensity, (int) Intensity, (int) Intensity);
             return resultColor;
         }
     }
@@ -29,10 +29,10 @@ namespace Filter
 
         protected override Color calculateNewPixelColor(Bitmap sourseImage, int x, int y)
         {
-            var sourceColor = sourseImage.GetPixel(x, y);
-            var Intensity = 0.36 * sourceColor.R + 0.53 * sourceColor.G + 0.11 * sourceColor.B;
-            var k = 25;
-            var resultColor = Color.FromArgb(Clamp((int) (Intensity + 2 * k), 0, 255),
+            Color sourceColor = sourseImage.GetPixel(x, y);
+            double Intensity = 0.36 * sourceColor.R + 0.53 * sourceColor.G + 0.11 * sourceColor.B;
+            int k = 25;
+            Color resultColor = Color.FromArgb(Clamp((int) (Intensity + 2 * k), 0, 255),
                 Clamp((int) (Intensity + 0.5 * k), 0, 255), Clamp((int) (Intensity - 1 * k), 0, 255));
             return resultColor;
         }
@@ -43,9 +43,9 @@ namespace Filter
 
         protected override Color calculateNewPixelColor(Bitmap sourseImage, int x, int y)
         {
-            var sourceColor = sourseImage.GetPixel(x, y);
-            var k = 50;
-            var resultColor = Color.FromArgb(Clamp((int) (sourceColor.R + k), 0, 255),
+            Color sourceColor = sourseImage.GetPixel(x, y);
+            int k = 50;
+            Color resultColor = Color.FromArgb(Clamp((int) (sourceColor.R + k), 0, 255),
                 Clamp((int) (sourceColor.G + k), 0, 255), Clamp((int) (sourceColor.B + k), 0, 255));
             return resultColor;
         }
@@ -55,11 +55,11 @@ namespace Filter
     {
         protected override Color calculateNewPixelColor(Bitmap sourseImage, int x, int y)
         {
-            var X = x + 50;
-            var resultColor = Color.Black;
+            int X = x + 50;
+            Color resultColor = Color.Black;
             if (X < sourseImage.Width)
             {
-                var sourceColor = sourseImage.GetPixel(X, y);
+                Color sourceColor = sourseImage.GetPixel(X, y);
                 resultColor = Color.FromArgb(Clamp((int) (sourceColor.R), 0, 255),
                     Clamp((int) (sourceColor.G), 0, 255), Clamp((int) (sourceColor.B), 0, 255));
             }
@@ -71,10 +71,10 @@ namespace Filter
     {
         protected override Color calculateNewPixelColor(Bitmap sourseImage, int x, int y)
         {
-            var X = Clamp((int) (x + 20 * (Math.Sin((2 * 3.14 * y) / 60))),0 , sourseImage.Width - 1);
+            int X = Clamp((int) (x + 20 * (Math.Sin((2 * 3.14 * y) / 60))),0 , sourseImage.Width - 1);
             
-            var sourceColor = sourseImage.GetPixel(X, y);
-            var resultColor = Color.FromArgb(Clamp((int) (sourceColor.R), 0, 255),
+            Color sourceColor = sourseImage.GetPixel(X, y);
+            Color resultColor = Color.FromArgb(Clamp((int) (sourceColor.R), 0, 255),
                 Clamp((int) (sourceColor.G), 0, 255), Clamp((int) (sourceColor.B), 0, 255));
             return resultColor;
         }
@@ -87,11 +87,11 @@ namespace Filter
 
         protected override Color calculateNewPixelColor(Bitmap sourseImage, int x, int y)
         {
-            var X = Clamp((int)(x + (_rand.Next(2) % 2 - 0.5) * 10), 0, sourseImage.Width - 1);
-            var Y = Clamp((int)(y + (_rand.Next(2) % 2 - 0.5) * 10), 0, sourseImage.Height - 1);
+            int X = Clamp((int)(x + (_rand.Next(2) % 2 - 0.5) * 10), 0, sourseImage.Width - 1);
+            int Y = Clamp((int)(y + (_rand.Next(2) % 2 - 0.5) * 10), 0, sourseImage.Height - 1);
             
-            var sourceColor = sourseImage.GetPixel(X, Y);
-            var resultColor = Color.FromArgb(Clamp((int) (sourceColor.R), 0, 255),
+            Color sourceColor = sourseImage.GetPixel(X, Y);
+            Color resultColor = Color.FromArgb(Clamp((int) (sourceColor.R), 0, 255),
                 Clamp((int) (sourceColor.G), 0, 255), Clamp((int) (sourceColor.B), 0, 255));
             return resultColor;
         }

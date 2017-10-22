@@ -27,11 +27,11 @@ namespace Filter
             int xminB = sourseImage.GetPixel(0, 0).B;
             int xmaxB = sourseImage.GetPixel(width, height).B;
 
-            var sourceColor = sourseImage.GetPixel(x, y);
+            Color sourceColor = sourseImage.GetPixel(x, y);
 
-            var resR = 0;
-            var resG = 0;
-            var resB = 0;
+            int resR = 0;
+            int resG = 0;
+            int resB = 0;
             if (xminR > sourceColor.R) xminR = sourceColor.R;
             if (xmaxR < sourceColor.R) xmaxR = sourceColor.R;
             if (xminG > sourceColor.G) xminG = sourceColor.G;
@@ -43,7 +43,7 @@ namespace Filter
             resG = (xmaxG != xminG) ? Y(sourceColor.G, xmaxG, xminG) : xmaxG;
             resB = (xmaxB != xminB) ? Y(sourceColor.B, xmaxB, xminB) : xmaxB;
 
-            var resultColor = Color.FromArgb(Clamp(resR, 0, 255), Clamp(resG, 0, 255), Clamp(resB, 0, 255));
+            Color resultColor = Color.FromArgb(Clamp(resR, 0, 255), Clamp(resG, 0, 255), Clamp(resB, 0, 255));
 
             return resultColor;
         }

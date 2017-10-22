@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.ComponentModel;
 using System;
+using System.Windows.Forms;
 
 namespace Filter
 {
@@ -8,11 +9,9 @@ namespace Filter
     {
         protected abstract Color calculateNewPixelColor(Bitmap sourseImage, int x, int y );
 
-        
-
         public Bitmap ProcessImage(Bitmap sourseImage, BackgroundWorker worker, int dx = 0 , int dy = 0)
         {
-            var resultImage = new Bitmap(sourseImage.Width, sourseImage.Height);
+            Bitmap resultImage = new Bitmap(sourseImage.Width, sourseImage.Height);
 
             for (int i = 0; i < sourseImage.Width; i++)
             {
