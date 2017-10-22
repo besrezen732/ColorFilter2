@@ -230,7 +230,7 @@ namespace Filter
 
         private void линейнаяКоррекцияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filtering(new LinearStretching(), e);
+            Filtering(new LinearStretching(baseImage), e);
         }
 
         private void медианныйФильтрToolStripMenuItem_Click(object sender, EventArgs e)
