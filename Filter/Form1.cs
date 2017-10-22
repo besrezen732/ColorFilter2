@@ -139,13 +139,12 @@ namespace Filter
             {
                 MessageBox.Show("Ошибка ручной останоки потока backgroundWorker1");
             }
-
         }
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
-                "Данная программа выполнена в качестве зачетного задания лабораторной работы \"Фильтры\" Трусовым Сергеем");
+                @"Данная программа выполнена в качестве зачетного задания лабораторной работы ""Фильтры"" командой студентов 456 457 групп Трусовым, Блиновым,Курниковым");
         }
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
@@ -186,7 +185,6 @@ namespace Filter
         private void размытиеПоГаусссуToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filtering(new GaussianFilter(), e);
-
         }
 
         private void оттенкиСерогоToolStripMenuItem_Click(object sender, EventArgs e)
@@ -239,7 +237,14 @@ namespace Filter
         {
             Filtering(new MedianFilter(), e);
         }
-
+        private void серыйМирToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filtering(new GreyWorld(baseImage), e);
+        }
+        private void идеальныйОтражательToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filtering(new PerfectReflector(baseImage), e);
+        }
 
         #endregion
 
@@ -266,5 +271,7 @@ namespace Filter
                 }
             }
         }
+
+        
     }
 }

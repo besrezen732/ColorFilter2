@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Drawing;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
-    
+
 
 namespace Filter
 {
