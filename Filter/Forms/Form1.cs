@@ -174,7 +174,7 @@ namespace Filter
 
         private void иверсияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filtering(new InventFilter(), e);
+            Filtering(new PointFilters(), e);
         }
 
         private void размытиеToolStripMenuItem_Click(object sender, EventArgs e)

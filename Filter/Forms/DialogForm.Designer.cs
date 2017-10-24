@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogForm));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,20 +50,21 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowDrop = true;
+            this.dataGridView1.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuPopup;
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.CausesValidation = false;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
             this.dataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.ColumnHeadersVisible = false;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3});
+            this.dataGridView1.Cursor = System.Windows.Forms.Cursors.IBeam;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -74,7 +76,8 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(16, 15);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -83,7 +86,7 @@
             this.dataGridView1.RowTemplate.Height = 100;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView1.Size = new System.Drawing.Size(120, 120);
+            this.dataGridView1.Size = new System.Drawing.Size(160, 148);
             this.dataGridView1.StandardTab = true;
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
@@ -134,9 +137,10 @@
             // btnOK
             // 
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(173, 233);
+            this.btnOK.Location = new System.Drawing.Point(304, 330);
+            this.btnOK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.Size = new System.Drawing.Size(100, 28);
             this.btnOK.TabIndex = 0;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -144,9 +148,10 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(254, 233);
+            this.btnCancel.Location = new System.Drawing.Point(412, 330);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(100, 28);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -155,9 +160,10 @@
             // 
             this.size1.AutoSize = true;
             this.size1.Checked = true;
-            this.size1.Location = new System.Drawing.Point(6, 19);
+            this.size1.Location = new System.Drawing.Point(33, 28);
+            this.size1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.size1.Name = "size1";
-            this.size1.Size = new System.Drawing.Size(48, 17);
+            this.size1.Size = new System.Drawing.Size(59, 21);
             this.size1.TabIndex = 3;
             this.size1.TabStop = true;
             this.size1.Text = "3 x 3";
@@ -167,9 +173,10 @@
             // size2
             // 
             this.size2.AutoSize = true;
-            this.size2.Location = new System.Drawing.Point(6, 42);
+            this.size2.Location = new System.Drawing.Point(33, 57);
+            this.size2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.size2.Name = "size2";
-            this.size2.Size = new System.Drawing.Size(48, 17);
+            this.size2.Size = new System.Drawing.Size(59, 21);
             this.size2.TabIndex = 4;
             this.size2.Text = "5 x 5";
             this.size2.UseVisualStyleBackColor = true;
@@ -178,9 +185,10 @@
             // size3
             // 
             this.size3.AutoSize = true;
-            this.size3.Location = new System.Drawing.Point(6, 65);
+            this.size3.Location = new System.Drawing.Point(33, 85);
+            this.size3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.size3.Name = "size3";
-            this.size3.Size = new System.Drawing.Size(48, 17);
+            this.size3.Size = new System.Drawing.Size(59, 21);
             this.size3.TabIndex = 5;
             this.size3.Text = "7 x 7";
             this.size3.UseVisualStyleBackColor = true;
@@ -191,32 +199,38 @@
             this.groupBox1.Controls.Add(this.size1);
             this.groupBox1.Controls.Add(this.size3);
             this.groupBox1.Controls.Add(this.size2);
-            this.groupBox1.Location = new System.Drawing.Point(255, 12);
+            this.groupBox1.Location = new System.Drawing.Point(379, 15);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(74, 92);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(133, 115);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "Размер матрицы";
             // 
             // DialogForm
             // 
             this.AcceptButton = this.btnOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(341, 268);
+            this.ClientSize = new System.Drawing.Size(542, 403);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DialogForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Properties";
+            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
