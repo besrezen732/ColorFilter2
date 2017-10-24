@@ -34,43 +34,6 @@ namespace Filter
             return resultColor;
         }
 
-
-        public void GetMinAndMaxBrightness(Bitmap sourseImage, out float[] min, out float[] max)
-        {
-            var width = sourseImage.Width;
-            var height = sourseImage.Height;
-
-            int xminR = sourseImage.GetPixel(0, 0).R;
-            int xminG = sourseImage.GetPixel(0, 0).G;
-            int xminB = sourseImage.GetPixel(0, 0).B;
-            int xmaxR = sourseImage.GetPixel(0, 0).R;
-            int xmaxG = sourseImage.GetPixel(0, 0).G;
-            int xmaxB = sourseImage.GetPixel(0, 0).B;
-
-            for (int i = 0; i < width; i++)
-            {
-                for (int j = 0; j < height; j++)
-                {
-                    var service = sourseImage.GetPixel(i, j);
-                    xminR = Math.Min(xminR, service.R);
-                    xminG = Math.Min(xminG, service.G);
-                    xminB = Math.Min(xminB, service.B);
-                    xmaxR = Math.Max(xmaxR, service.R);
-                    xmaxG = Math.Max(xmaxG, service.G);
-                    xmaxB = Math.Max(xmaxB, service.B);
-                }
-            }
-            min = new float[3];
-            max = new float[3];
-            max[0] = (float) xmaxR;
-            max[1] = (float) xmaxG;
-            max[2] = (float) xmaxB;
-
-            min[0] = (float) xminR;
-            min[1] = (float) xminG;
-            min[2] = (float) xminB;
-        }
-
     }
 
 }
