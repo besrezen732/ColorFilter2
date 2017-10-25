@@ -127,6 +127,7 @@
   <ItemGroup>
     <Content Include="label.ico" />
     <Content Include="Other\label.ico" />
+    <Content Include="Other\savePicture.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
