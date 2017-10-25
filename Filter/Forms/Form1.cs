@@ -8,6 +8,7 @@ namespace Filter
 
     public partial class FilterBaseForm : Form
     {
+        public Color serviceColor = new Color();
         Bitmap baseImage;
 
         #region //обработчик потока
@@ -237,10 +238,12 @@ namespace Filter
         {
             Filtering(new MedianFilter(), e);
         }
+
         private void серыйМирToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filtering(new GreyWorld(baseImage), e);
         }
+
         private void идеальныйОтражательToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filtering(new PerfectReflector(baseImage), e);
@@ -274,10 +277,43 @@ namespace Filter
 
         private void коррекцияСОпорнымЦветомToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             if (colorDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
+            int[] sColor = {serviceColor.R, serviceColor.G, serviceColor.B};
+
             Color refColor = colorDialog1.Color;
-            Filtering(new ReferenceColor(refColor,baseImage), e);
+            colorDialog1.CustomColors = sColor;
+            Filtering(new ReferenceColor(refColor, baseImage), e);
+        }
+
+
+        public void pictureBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            float cPictureImageX = (pictureBox.Width / 2);
+            float cPictureImageY = (pictureBox.Height / 2);
+            float cImageX = (baseImage.Width / 2);
+            float cImageY = (baseImage.Height / 2);
+
+            float param = Math.Min(cPictureImageX / cImageX, cPictureImageY / cImageY);
+            cImageX *= param;
+            cImageY *= param;
+
+            if ((((int) (cPictureImageX - cImageX + 1) <= e.X) && ((int) (cPictureImageX + cImageX - 1) >= e.X)) &&
+                (((int) (cPictureImageY - cImageY + 1) <= e.Y) && ((int) (cPictureImageY + cImageY - 1) >= e.Y)))
+            {
+
+                var newX =(int)( (e.X - (int) (cPictureImageX - cImageX - 1))/param);
+                var newY = (int)((e.Y - (int) (cPictureImageY - cImageY - 1)) / param);
+                serviceColor =
+                    baseImage.GetPixel(newX,newY);
+
+            }
+            else
+                serviceColor = Color.Green;
+            pictureBox.BackColor = serviceColor;
+
+
         }
     }
 }
