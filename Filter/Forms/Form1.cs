@@ -171,7 +171,7 @@ namespace Filter
                 }
             }
         }
-        
+
 
         private void иверсияToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -196,7 +196,7 @@ namespace Filter
         private void сепияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filtering(new SepiaFilter(), e);
-            
+
         }
 
         private void jarcostToolStripMenuItem_Click(object sender, EventArgs e)
@@ -280,10 +280,8 @@ namespace Filter
 
             if (colorDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
-            int[] sColor = {serviceColor.R, serviceColor.G, serviceColor.B};
-
             Color refColor = colorDialog1.Color;
-            colorDialog1.CustomColors = sColor;
+
             Filtering(new ReferenceColor(refColor, baseImage), e);
         }
 
@@ -303,10 +301,10 @@ namespace Filter
                 (((int) (cPictureImageY - cImageY + 1) <= e.Y) && ((int) (cPictureImageY + cImageY - 1) >= e.Y)))
             {
 
-                var newX =(int)( (e.X - (int) (cPictureImageX - cImageX - 1))/param);
-                var newY = (int)((e.Y - (int) (cPictureImageY - cImageY - 1)) / param);
+                var newX = (int) ((e.X - (int) (cPictureImageX - cImageX - 1)) / param);
+                var newY = (int) ((e.Y - (int) (cPictureImageY - cImageY - 1)) / param);
                 serviceColor =
-                    baseImage.GetPixel(newX,newY);
+                    baseImage.GetPixel(newX, newY);
 
             }
             else
