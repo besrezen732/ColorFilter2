@@ -64,7 +64,7 @@ namespace Filter
 
         #region // Открытие и Сохранение файла
 
-        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
+        public void OpenPicture()
         {
             try
             {
@@ -87,9 +87,12 @@ namespace Filter
                 MessageBox.Show("Ошибка загрузки картинки");
             }
         }
+        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+          OpenPicture();
+        }
 
-
-        private void сохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
+        public void SavePicture()
         {
             if (pictureBox.Image != null) //если в pictureBox есть изображение
             {
@@ -118,6 +121,19 @@ namespace Filter
                     }
                 }
             }
+        }
+
+        private void сохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SavePicture();
+        }
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            OpenPicture();
+        }
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            SavePicture();
         }
 
         #endregion
@@ -313,5 +329,7 @@ namespace Filter
 
 
         }
+
+      
     }
 }
