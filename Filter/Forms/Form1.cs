@@ -272,6 +272,12 @@ namespace Filter
             }
         }
 
-        
+        private void коррекцияСОпорнымЦветомToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.Cancel)
+                return;
+            Color refColor = colorDialog1.Color;
+            Filtering(new ReferenceColor(refColor,baseImage), e);
+        }
     }
 }
