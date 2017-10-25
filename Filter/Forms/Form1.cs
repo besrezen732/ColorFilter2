@@ -88,7 +88,8 @@ namespace Filter
             }
         }
 
-        public void SavePicture()
+
+        private void сохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (pictureBox.Image != null) //если в pictureBox есть изображение
             {
@@ -117,11 +118,6 @@ namespace Filter
                     }
                 }
             }
-        }
-
-        private void сохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SavePicture();
         }
 
         #endregion
@@ -281,7 +277,7 @@ namespace Filter
 
         private void коррекцияСОпорнымЦветомToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
             if (colorDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
             Color refColor = colorDialog1.Color;
@@ -312,13 +308,10 @@ namespace Filter
 
             }
             else
-                serviceColor = pictureBox.BackColor;
+                serviceColor = Color.Green;
             pictureBox.BackColor = serviceColor;
-        }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            SavePicture();
+
         }
     }
 }
