@@ -8,6 +8,7 @@ namespace Filter
 
     public partial class FilterBaseForm : Form
     {
+        public Color serviceColor = new Color();
         Bitmap baseImage;
 
         #region //обработчик потока
@@ -63,7 +64,7 @@ namespace Filter
 
         #region // Открытие и Сохранение файла
 
-        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
+        public void OpenPicture()
         {
             try
             {
@@ -86,9 +87,12 @@ namespace Filter
                 MessageBox.Show("Ошибка загрузки картинки");
             }
         }
+        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+          OpenPicture();
+        }
 
-
-        private void сохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
+        public void SavePicture()
         {
             if (pictureBox.Image != null) //если в pictureBox есть изображение
             {
@@ -117,6 +121,19 @@ namespace Filter
                     }
                 }
             }
+        }
+
+        private void сохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SavePicture();
+        }
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            OpenPicture();
+        }
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            SavePicture();
         }
 
         #endregion
@@ -170,7 +187,7 @@ namespace Filter
                 }
             }
         }
-        
+
 
         private void иверсияToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -195,7 +212,7 @@ namespace Filter
         private void сепияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filtering(new SepiaFilter(), e);
-            
+
         }
 
         private void jarcostToolStripMenuItem_Click(object sender, EventArgs e)
@@ -237,10 +254,12 @@ namespace Filter
         {
             Filtering(new MedianFilter(), e);
         }
+
         private void серыйМирToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filtering(new GreyWorld(baseImage), e);
         }
+
         private void идеальныйОтражательToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filtering(new PerfectReflector(baseImage), e);
@@ -274,10 +293,43 @@ namespace Filter
 
         private void коррекцияСОпорнымЦветомToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             if (colorDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
             Color refColor = colorDialog1.Color;
-            Filtering(new ReferenceColor(refColor,baseImage), e);
+
+            Filtering(new ReferenceColor(refColor, baseImage), e);
         }
+
+
+        public void pictureBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            float cPictureImageX = (pictureBox.Width / 2);
+            float cPictureImageY = (pictureBox.Height / 2);
+            float cImageX = (baseImage.Width / 2);
+            float cImageY = (baseImage.Height / 2);
+
+            float param = Math.Min(cPictureImageX / cImageX, cPictureImageY / cImageY);
+            cImageX *= param;
+            cImageY *= param;
+
+            if ((((int) (cPictureImageX - cImageX + 1) <= e.X) && ((int) (cPictureImageX + cImageX - 1) >= e.X)) &&
+                (((int) (cPictureImageY - cImageY + 1) <= e.Y) && ((int) (cPictureImageY + cImageY - 1) >= e.Y)))
+            {
+
+                var newX = (int) ((e.X - (int) (cPictureImageX - cImageX - 1)) / param);
+                var newY = (int) ((e.Y - (int) (cPictureImageY - cImageY - 1)) / param);
+                serviceColor =
+                    baseImage.GetPixel(newX, newY);
+
+            }
+            else
+                serviceColor = Color.Green;
+            pictureBox.BackColor = serviceColor;
+
+
+        }
+
+      
     }
 }

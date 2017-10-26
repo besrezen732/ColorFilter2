@@ -53,13 +53,23 @@ namespace Filter
 
     public class Shift : Filters
     {
+        //public int dX;
+        //public int dY;
+
+        //public Shift(int dx, int dy)
+        //{
+        //    dX = dx;
+        //    dY = dy;
+        //}
+
         protected override Color calculateNewPixelColor(Bitmap sourseImage, int x, int y)
         {
             int X = x + 50;
+            int Y = y + 50;
             Color resultColor = Color.Black;
-            if (X < sourseImage.Width)
+            if (X < sourseImage.Width && Y < sourseImage.Height)
             {
-                Color sourceColor = sourseImage.GetPixel(X, y);
+                Color sourceColor = sourseImage.GetPixel(X, Y);
                 resultColor = Color.FromArgb(Clamp((int) (sourceColor.R), 0, 255),
                     Clamp((int) (sourceColor.G), 0, 255), Clamp((int) (sourceColor.B), 0, 255));
             }
