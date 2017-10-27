@@ -3,12 +3,14 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Threading;
+using  System.Collections.Generic;
 
 namespace Filter
 {
 
     public partial class FilterBaseForm : Form
     {
+        private Stack<Bitmap> bitmapStack;
         public Color serviceColor = new Color();
         Bitmap baseImage;
 
@@ -19,7 +21,8 @@ namespace Filter
             try
             {
                 Bitmap image = baseImage;
-                Bitmap newImage = ((Filters)e.Argument).ProcessImage(image, backgroundWorker1);
+                bitmapStack.Push(image);
+                Bitmap newImage = ((Filters)e.Argument).ProcessImage(image, backgroundWorker1,0,4);
                 if (backgroundWorker1.CancellationPending != true)
                 {
                     baseImage = newImage;
@@ -36,13 +39,14 @@ namespace Filter
             try
             {
                 Bitmap image = baseImage;
-                Bitmap newImage = ((Filters[])e.Argument)[0].ProcessImage(image, backgroundWorker1, 50);
+                Bitmap newImage = ((Filters[])e.Argument)[0].ProcessImage(image, backgroundWorker1, 50, 4);
                 image = newImage;
-                newImage = ((Filters[])e.Argument)[1].ProcessImage(image, backgroundWorker1, 100);
+                newImage = ((Filters[])e.Argument)[1].ProcessImage(image, backgroundWorker1, 100,4);
                 if (backgroundWorker1.CancellationPending != true)
                 {
                     baseImage = newImage;
                 }
+                
             }
             catch (Exception ex)
             {
@@ -74,6 +78,7 @@ namespace Filter
                     pictureBox.Refresh();
                 }
                 progressBar1.Value = 0;
+                //toolStripButton3.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -108,6 +113,7 @@ namespace Filter
                     линейнаяКоррекцияToolStripMenuItem.Enabled = true;
                     матМорфологииToolStripMenuItem.Enabled = true;
                     специальныеФильтрыToolStripMenuItem.Enabled = true;
+                    bitmapStack.Push(baseImage);
                 }
             }
             catch (Exception ex)
@@ -169,6 +175,7 @@ namespace Filter
         //Constructor
         public FilterBaseForm()
         {
+            bitmapStack = new Stack<Bitmap>();
             InitializeComponent();
         }
 
@@ -201,6 +208,7 @@ namespace Filter
         {
             try
             {
+                //toolStripButton3.Enabled = false;
                 backgroundWorker1.RunWorkerAsync(filter);
             }
             catch (Exception ex)
@@ -383,6 +391,17 @@ namespace Filter
                 backgroundWorker1.DoWork -= backgroundWorker1_DoWork1;
                 backgroundWorker1.DoWork += backgroundWorker1_DoWork;
             }
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            if (!(bitmapStack.Count == 0))
+                pictureBox.Image = new Bitmap(bitmapStack.Pop());
+        }
+
+        private void зеркалоToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filtering(new MirrorFilter(),e );
         }
     }
 }
