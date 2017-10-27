@@ -13,7 +13,6 @@ namespace Filter
     public partial class DialogForm : Form
     {
         int startValue;
-        enum MatrixType { square, circle, ring }
         int[,] matrix;
         public int Size
         {

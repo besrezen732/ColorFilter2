@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Filter
 {
@@ -17,8 +18,8 @@ namespace Filter
         {
             try
             {
-                int dx = 50;
-                Bitmap newImage = ((Filters) e.Argument).ProcessImage(baseImage, backgroundWorker1, dx);
+                Bitmap image = baseImage;
+                Bitmap newImage = ((Filters)e.Argument).ProcessImage(image, backgroundWorker1);
                 if (backgroundWorker1.CancellationPending != true)
                 {
                     baseImage = newImage;
@@ -29,6 +30,26 @@ namespace Filter
                 MessageBox.Show("Ошибка вackgroundWorker1_DoWork\n" + ex.TargetSite + " " + ex.Message);
             }
         }
+
+        private void backgroundWorker1_DoWork1(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                Bitmap image = baseImage;
+                Bitmap newImage = ((Filters[])e.Argument)[0].ProcessImage(image, backgroundWorker1, 50);
+                image = newImage;
+                newImage = ((Filters[])e.Argument)[1].ProcessImage(image, backgroundWorker1, 100);
+                if (backgroundWorker1.CancellationPending != true)
+                {
+                    baseImage = newImage;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка вackgroundWorker1_DoWork1\n" + ex.TargetSite + " " + ex.Message);
+            }
+        }
+
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
@@ -80,6 +101,13 @@ namespace Filter
                     baseImage = new Bitmap(imagePath);
                     pictureBox.Image = baseImage;
                     pictureBox.Refresh();
+
+                    матричныеToolStripMenuItem.Enabled = true;
+                    точечныеToolStripMenuItem.Enabled = true;
+                    медианныйФильтрToolStripMenuItem.Enabled = true;
+                    линейнаяКоррекцияToolStripMenuItem.Enabled = true;
+                    матМорфологииToolStripMenuItem.Enabled = true;
+                    специальныеФильтрыToolStripMenuItem.Enabled = true;
                 }
             }
             catch (Exception ex)
@@ -89,7 +117,7 @@ namespace Filter
         }
         private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          OpenPicture();
+            OpenPicture();
         }
 
         public void SavePicture()
@@ -169,25 +197,19 @@ namespace Filter
             this.Dispose();
         }
 
-        #region //выполнение фильтров
-
         private void Filtering(Filters filter, EventArgs e)
         {
-            if (baseImage == null)
-                MessageBox.Show("Выберите изображение для обработки");
-            else
+            try
             {
-                try
-                {
-                    backgroundWorker1.RunWorkerAsync(filter);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка запуска потока");
-                }
+                backgroundWorker1.RunWorkerAsync(filter);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка запуска потока");
             }
         }
 
+        #region //выполнение фильтров
 
         private void иверсияToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -269,36 +291,27 @@ namespace Filter
 
         private void расширениеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (baseImage != null)
-            {
-                DialogForm dialog = new DialogForm();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    Filtering(new Dilation(dialog.GetMatrix()), e);
-                }
-            }
+            DialogForm dialog = new DialogForm();
+            if (dialog.ShowDialog() == DialogResult.OK)
+                Filtering(new Dilation(dialog.GetMatrix()), e);
         }
 
         private void эрозияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (baseImage != null)
-            {
-                DialogForm dialog = new DialogForm();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    Filtering(new Erosion(dialog.GetMatrix()), e);
-                }
-            }
+            DialogForm dialog = new DialogForm();
+            if (dialog.ShowDialog() == DialogResult.OK)
+                Filtering(new Erosion(dialog.GetMatrix()), e);
         }
 
         private void коррекцияСОпорнымЦветомToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            if (colorDialog1.ShowDialog() == DialogResult.Cancel)
-                return;
-            Color refColor = colorDialog1.Color;
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Color refColor = colorDialog1.Color;
 
-            Filtering(new ReferenceColor(refColor, baseImage), e);
+                Filtering(new ReferenceColor(refColor, baseImage), e);
+            }
         }
 
 
@@ -313,12 +326,12 @@ namespace Filter
             cImageX *= param;
             cImageY *= param;
 
-            if ((((int) (cPictureImageX - cImageX + 1) <= e.X) && ((int) (cPictureImageX + cImageX - 1) >= e.X)) &&
-                (((int) (cPictureImageY - cImageY + 1) <= e.Y) && ((int) (cPictureImageY + cImageY - 1) >= e.Y)))
+            if ((((int)(cPictureImageX - cImageX + 1) <= e.X) && ((int)(cPictureImageX + cImageX - 1) >= e.X)) &&
+                (((int)(cPictureImageY - cImageY + 1) <= e.Y) && ((int)(cPictureImageY + cImageY - 1) >= e.Y)))
             {
 
-                var newX = (int) ((e.X - (int) (cPictureImageX - cImageX - 1)) / param);
-                var newY = (int) ((e.Y - (int) (cPictureImageY - cImageY - 1)) / param);
+                var newX = (int)((e.X - (int)(cPictureImageX - cImageX - 1)) / param);
+                var newY = (int)((e.Y - (int)(cPictureImageY - cImageY - 1)) / param);
                 serviceColor =
                     baseImage.GetPixel(newX, newY);
 
@@ -326,10 +339,50 @@ namespace Filter
             else
                 serviceColor = Color.Green;
             pictureBox.BackColor = serviceColor;
-
-
         }
 
-      
+        private void открытиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogForm dialog = new DialogForm();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                backgroundWorker1.DoWork -= backgroundWorker1_DoWork;
+                backgroundWorker1.DoWork += backgroundWorker1_DoWork1;
+                Filters[] filters = { new Erosion(dialog.GetMatrix()), new Dilation(dialog.GetMatrix()) };
+                try
+                {
+                    backgroundWorker1.RunWorkerAsync(filters);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка запуска потока");
+                }
+                Thread.Sleep(50);
+                backgroundWorker1.DoWork -= backgroundWorker1_DoWork1;
+                backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            }
+        }
+
+        private void закрытиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogForm dialog = new DialogForm();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                backgroundWorker1.DoWork -= backgroundWorker1_DoWork;
+                backgroundWorker1.DoWork += backgroundWorker1_DoWork1;
+                Filters[] filters = { new Dilation(dialog.GetMatrix()), new Erosion(dialog.GetMatrix()) };
+                try
+                {
+                    backgroundWorker1.RunWorkerAsync(filters);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка запуска потока");
+                }
+                Thread.Sleep(50);
+                backgroundWorker1.DoWork -= backgroundWorker1_DoWork1;
+                backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            }
+        }
     }
 }

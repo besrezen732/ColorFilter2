@@ -8,67 +8,69 @@ using System.Windows.Forms;
 
 namespace Filter
 {
-    class Dilation : Filters
+    class MathMorphology : Filters
     {
         int[,] structElem = null;
-        protected Color max;
+        protected Color startColor;
 
-        public Dilation(int[,] structElem)
+        public MathMorphology(int[,] structElem)
         {
             this.structElem = structElem;
         }
 
-        protected override Color calculateNewPixelColor(Bitmap sourseImage, int x, int y)
+        public static bool ColorComparation(Color color1, Color color2)
         {
-            Color result;
-            max = Color.Black;
+            if (color1.R > color2.R || color1.G > color2.G || color1.B > color2.B)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        Color Calcuation(Bitmap sourceImage, int x, int y, Color startColor)
+        {
+            Color resultColor = startColor;
+            bool comparationResult;
             for (int i = -structElem.GetLength(0) / 2; i < structElem.GetLength(0) / 2; i++)
                 for (int j = -structElem.GetLength(0) / 2; j < structElem.GetLength(0) / 2; j++)
                 {
-                    if ((structElem[i + structElem.GetLength(0) / 2, j + structElem.GetLength(0) / 2] == 1) &&
-                        ((sourseImage.GetPixel(Clamp(x + i, 0, sourseImage.Width - 1), (Clamp(y + j, 0, sourseImage.Height - 1))).R > max.R) ||
-                        (sourseImage.GetPixel(Clamp(x + i, 0, sourseImage.Width - 1), (Clamp(y + j, 0, sourseImage.Height - 1))).G > max.G) ||
-                        (sourseImage.GetPixel(Clamp(x + i, 0, sourseImage.Width - 1), (Clamp(y + j, 0, sourseImage.Height - 1))).B > max.B))
-                        )
+                    comparationResult = false;
+                    if (structElem[i + structElem.GetLength(0) / 2, j + structElem.GetLength(0) / 2] == 1)
                     {
-                        max = sourseImage.GetPixel(Clamp(x + i, 0, sourseImage.Width - 1), (Clamp(y + j, 0, sourseImage.Height - 1)));
+                        if (startColor == Color.Black)
+                            comparationResult = ColorComparation(sourceImage.GetPixel(Clamp(x + i, 0, sourceImage.Width - 1), (Clamp(y + j, 0, sourceImage.Height - 1))), resultColor);
+                        else if(startColor == Color.White)
+                            comparationResult = ColorComparation(resultColor, sourceImage.GetPixel(Clamp(x + i, 0, sourceImage.Width - 1), (Clamp(y + j, 0, sourceImage.Height - 1))));
+                        if (comparationResult)
+                            resultColor = sourceImage.GetPixel(Clamp(x + i, 0, sourceImage.Width - 1), (Clamp(y + j, 0, sourceImage.Height - 1)));
                     }
                 }
-            result = max;
-            return result;
+            return resultColor;
+
+        }
+
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            return Calcuation(sourceImage, x, y, startColor);
         }
     }
 
 
 
-    class Erosion : Filters
+    class Erosion : MathMorphology
     {
-        int[,] structElem = null;
-        protected Color max;
-
-        public Erosion(int[,] structElem)
+        public Erosion(int[,] structElem) : base(structElem)
         {
-            this.structElem = structElem;
+            startColor = Color.White;
         }
+    }
 
-        protected override Color calculateNewPixelColor(Bitmap sourseImage, int x, int y)
+    class Dilation : MathMorphology
+    {
+        public Dilation(int[,] structElem) : base(structElem)
         {
-            Color result;
-            max = Color.White;
-            for (int i = -structElem.GetLength(0) / 2; i < structElem.GetLength(0) / 2; i++)
-                for (int j = -structElem.GetLength(0) / 2; j < structElem.GetLength(0) / 2; j++)
-                {
-                    if ((structElem[i + structElem.GetLength(0) / 2, j + structElem.GetLength(0) / 2] == 1) &&
-                        ((sourseImage.GetPixel(Clamp(x + i, 0, sourseImage.Width - 1), (Clamp(y + j, 0, sourseImage.Height - 1))).R < max.R) ||
-                        (sourseImage.GetPixel(Clamp(x + i, 0, sourseImage.Width - 1), (Clamp(y + j, 0, sourseImage.Height - 1))).G < max.G) ||
-                        (sourseImage.GetPixel(Clamp(x + i, 0, sourseImage.Width - 1), (Clamp(y + j, 0, sourseImage.Height - 1))).B < max.B))
-                        )
-                    {
-                        max = sourseImage.GetPixel(Clamp(x + i, 0, sourseImage.Width - 1), (Clamp(y + j, 0, sourseImage.Height - 1)));
-                    }
-                }
-            result = max;
-            return result;
+            startColor = Color.Black;
         }
     }
 }
