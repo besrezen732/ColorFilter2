@@ -1,9 +1,0 @@
-c:\users\бг\documents\visual studio 2015\Projects\HoloSharp\HoloSharp\bin\Debug\HoloSharp.exe.config
-c:\users\бг\documents\visual studio 2015\Projects\HoloSharp\HoloSharp\bin\Debug\HoloSharp.exe
-c:\users\бг\documents\visual studio 2015\Projects\HoloSharp\HoloSharp\bin\Debug\HoloSharp.pdb
-c:\users\бг\documents\visual studio 2015\Projects\HoloSharp\HoloSharp\obj\Debug\HoloSharp.csprojResolveAssemblyReference.cache
-c:\users\бг\documents\visual studio 2015\Projects\HoloSharp\HoloSharp\obj\Debug\HoloSharp.Form1.resources
-c:\users\бг\documents\visual studio 2015\Projects\HoloSharp\HoloSharp\obj\Debug\HoloSharp.Properties.Resources.resources
-c:\users\бг\documents\visual studio 2015\Projects\HoloSharp\HoloSharp\obj\Debug\HoloSharp.csproj.GenerateResource.Cache
-c:\users\бг\documents\visual studio 2015\Projects\HoloSharp\HoloSharp\obj\Debug\HoloSharp.exe
-c:\users\бг\documents\visual studio 2015\Projects\HoloSharp\HoloSharp\obj\Debug\HoloSharp.pdb
