@@ -40,6 +40,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.Cancel = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.восстановлениеИзображенияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
@@ -49,7 +50,8 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
-            this.интенсивностьToolStripMenuItem});
+            this.интенсивностьToolStripMenuItem,
+            this.восстановлениеИзображенияToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 28);
@@ -134,6 +136,13 @@
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
             // 
+            // восстановлениеИзображенияToolStripMenuItem
+            // 
+            this.восстановлениеИзображенияToolStripMenuItem.Name = "восстановлениеИзображенияToolStripMenuItem";
+            this.восстановлениеИзображенияToolStripMenuItem.Size = new System.Drawing.Size(235, 24);
+            this.восстановлениеИзображенияToolStripMenuItem.Text = "Восстановление изображения";
+            this.восстановлениеИзображенияToolStripMenuItem.Click += new System.EventHandler(this.восстановлениеИзображенияToolStripMenuItem_Click);
+            // 
             // BaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -168,6 +177,7 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button Cancel;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.ToolStripMenuItem восстановлениеИзображенияToolStripMenuItem;
     }
 }
 

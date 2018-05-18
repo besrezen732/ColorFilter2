@@ -132,5 +132,11 @@ namespace intensity
                 MessageBox.Show("Ошибка ручной останоки потока backgroundWorker1");
             }
         }
+
+        private void восстановлениеИзображенияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ImageRecovery imageRec = new ImageRecovery();
+            imageRec.RecoveryImage(ref baseImage, ref richTextBox1);
+        }
     }
 }

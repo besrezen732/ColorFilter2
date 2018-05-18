@@ -20,6 +20,5 @@ namespace intensity
                 fstream.Write(array, 0, array.Length);
             }
         }
-
     }
 }
