@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,10 +14,13 @@ namespace intensity
 
 
             PointFilters intensyFilters = new PointFilters();
-            #region Veriable
 
-           
-            int sizeX = picture.Width, sizeY = picture.Height;
+            #region Variable
+
+
+           // int sizeX = picture.Width, sizeY = picture.Height;
+
+            int sizeX = 300, sizeY = 300;
 
             const int Xrp0 = 0, Yrp0 = 0;
             const int z = 100;
@@ -54,25 +56,27 @@ namespace intensity
 
             #region //НАЧАЛО ГЛАВНОГО ЦИКЛА!!!
 
-            for (int i = 0; i < sizeX; i++)
+            Parallel.For(0, sizeX, iX =>
             {
                 for (int j = 0; j < sizeY; j++)
 
                 {
-                    Lout[i, j] = Math.Sqrt((((Xrp0 - Xip[i]) * (Xrp0 - Xip[i])) +
-                                            ((Yrp0 - Yip[j]) * (Yrp0 - Yip[j])) +
-                                            z * z)); //расстояние от "внешней" точки цикла до изображения
+                    Lout[iX, j] = Math.Sqrt((((Xrp0 - Xip[iX]) * (Xrp0 - Xip[iX])) +
+                                             ((Yrp0 - Yip[j]) * (Yrp0 - Yip[j])) +
+                                             z * z)); //расстояние от "внешней" точки цикла до изображения
 
                     //нормализация лямбда, поиск dlambdaI2
-                    dlambdaI2[i, j] =
-                        Lout[i, j] -
-                        _lambda * (int) (Lout[i, j] / _lambda); //(int) нужен тк дельта лямбда должна быть меньше 1
-                   
-                    for (int m = 0; m < sizeX; m++) //вторичный цикл (пересчет всех источников для одной точки экрана)
+                    dlambdaI2[iX, j] =
+                        Lout[iX, j] -
+                        _lambda * (int) (Lout[iX, j] / _lambda); //(int) нужен тк дельта лямбда должна быть меньше 1
+
+                    for (int m = 0;
+                        m < sizeX;
+                        m++) //вторичный цикл (пересчет всех источников для одной точки экрана)
                     {
                         for (int n = 0; n < sizeY; n++)
                         {
-                            Lins[m, n] = Math.Sqrt((((Xrp[m] - Xip[i]) * (Xrp[m] - Xip[i])) +
+                            Lins[m, n] = Math.Sqrt((((Xrp[m] - Xip[iX]) * (Xrp[m] - Xip[iX])) +
                                                     ((Yrp[n] - Yip[j]) * (Yrp[n] - Yrp[j])) +
                                                     z * z)); //расстояние от "внутренней" точки цикла до изображения
 
@@ -82,9 +86,11 @@ namespace intensity
                                 _lambda * (int) (Lins[m, n] /
                                                  _lambda); //(int) нужен тк дельта лямбда должна быть меньше 1
                             ;
-                            I2[m, n] = (Math.Cos((2 * Math.PI / _lambda) * (dlambdaJ2[m, n] - dlambdaI2[i, j])));// домножить на интенсивность ij
+                            I2[m, n] = (Math.Cos((2 * Math.PI / _lambda) *
+                                                 (dlambdaJ2[m, n] - dlambdaI2[iX, j]))
+                            ); // домножить на интенсивность ij
 
-                            F[i, j] = F[i, j] + I2[m, n];
+                            F[iX, j] = F[iX, j] + I2[m, n];
 
 
                         }
@@ -94,46 +100,46 @@ namespace intensity
 
                 }
 
-            }
+
+            });
 
             #endregion
 
 
 
             //перевод полученных величин интерференционной картины к отрезку [0;1]   
-            for (int i = 0; i < sizeX; i++)
+            Parallel.For(0, sizeX, i =>
             {
                 for (int j = 0; j < sizeY; j++)
                 {
                     if (F[i, j] > _fmax)
                         _fmax = F[i, j];
                 }
-            }
+            });
 
-            for (int i = 0; i < sizeX; i++)
+            Parallel.For(0, sizeX, i =>
             {
                 for (int j = 0; j < sizeY; j++)
                 {
                     if (F[i, j] < _fmin)
                         _fmin = F[i, j];
                 }
-            }
+            });
 
-            for (int i = 0; i < sizeX; i++)
+            Parallel.For(0, sizeX, i =>
             {
                 for (int j = 0; j < sizeY; j++)
                 {
-                    //F[i,j] = (F[i,j] - _fmin) / (_fmax - _fmin);
-                    double chislo = (F[i, j] - _fmin) / (_fmax - _fmin);
-                    returnString.AppendLine(i + "   " + chislo.ToString());
 
-                    //вывод
+                    double chislo = (F[i, j] - _fmin) / (_fmax - _fmin);
+                    returnString.AppendLine(i + "   " + chislo);
                 }
-            }
+            });
             textBox.Text = returnString.ToString();
         }
 
-       
+
+      
     }
 }
 
