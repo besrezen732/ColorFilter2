@@ -11,10 +11,10 @@ c:\users\admin\source\repos\intensity\intensity\obj\Debug\intensity.pdb
 E:\Проекты\ColorFilter2\intensity\intensity\bin\Debug\intensity.exe.config
 E:\Проекты\ColorFilter2\intensity\intensity\bin\Debug\intensity.exe
 E:\Проекты\ColorFilter2\intensity\intensity\bin\Debug\intensity.pdb
-E:\Проекты\ColorFilter2\intensity\intensity\obj\Debug\intensity.csprojResolveAssemblyReference.cache
 E:\Проекты\ColorFilter2\intensity\intensity\obj\Debug\intensity.BaseForm.resources
 E:\Проекты\ColorFilter2\intensity\intensity\obj\Debug\intensity.Properties.Resources.resources
 E:\Проекты\ColorFilter2\intensity\intensity\obj\Debug\intensity.csproj.GenerateResource.cache
 E:\Проекты\ColorFilter2\intensity\intensity\obj\Debug\intensity.csproj.CoreCompileInputs.cache
 E:\Проекты\ColorFilter2\intensity\intensity\obj\Debug\intensity.exe
 E:\Проекты\ColorFilter2\intensity\intensity\obj\Debug\intensity.pdb
+E:\Проекты\ColorFilter2\intensity\intensity\obj\Debug\intensity.csprojResolveAssemblyReference.cache

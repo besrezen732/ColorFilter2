@@ -34,15 +34,17 @@
             this.открытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.интенсивностьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.восстановлениеИзображенияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.Cancel = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.восстановлениеИзображенияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBoxRecovery = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRecovery)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -54,7 +56,7 @@
             this.восстановлениеИзображенияToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1337, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -88,6 +90,13 @@
             this.интенсивностьToolStripMenuItem.Text = "Интенсивность";
             this.интенсивностьToolStripMenuItem.Click += new System.EventHandler(this.интенсивностьToolStripMenuItem_Click);
             // 
+            // восстановлениеИзображенияToolStripMenuItem
+            // 
+            this.восстановлениеИзображенияToolStripMenuItem.Name = "восстановлениеИзображенияToolStripMenuItem";
+            this.восстановлениеИзображенияToolStripMenuItem.Size = new System.Drawing.Size(235, 24);
+            this.восстановлениеИзображенияToolStripMenuItem.Text = "Восстановление изображения";
+            this.восстановлениеИзображенияToolStripMenuItem.Click += new System.EventHandler(this.восстановлениеИзображенияToolStripMenuItem_Click);
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -115,12 +124,12 @@
             // 
             this.progressBar1.Location = new System.Drawing.Point(12, 415);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(662, 23);
+            this.progressBar1.Size = new System.Drawing.Size(1216, 23);
             this.progressBar1.TabIndex = 3;
             // 
             // Cancel
             // 
-            this.Cancel.Location = new System.Drawing.Point(696, 415);
+            this.Cancel.Location = new System.Drawing.Point(1234, 415);
             this.Cancel.Name = "Cancel";
             this.Cancel.Size = new System.Drawing.Size(75, 23);
             this.Cancel.TabIndex = 5;
@@ -136,18 +145,21 @@
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
             // 
-            // восстановлениеИзображенияToolStripMenuItem
+            // pictureBoxRecovery
             // 
-            this.восстановлениеИзображенияToolStripMenuItem.Name = "восстановлениеИзображенияToolStripMenuItem";
-            this.восстановлениеИзображенияToolStripMenuItem.Size = new System.Drawing.Size(235, 24);
-            this.восстановлениеИзображенияToolStripMenuItem.Text = "Восстановление изображения";
-            this.восстановлениеИзображенияToolStripMenuItem.Click += new System.EventHandler(this.восстановлениеИзображенияToolStripMenuItem_Click);
+            this.pictureBoxRecovery.Location = new System.Drawing.Point(809, 31);
+            this.pictureBoxRecovery.Name = "pictureBoxRecovery";
+            this.pictureBoxRecovery.Size = new System.Drawing.Size(500, 367);
+            this.pictureBoxRecovery.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxRecovery.TabIndex = 7;
+            this.pictureBoxRecovery.TabStop = false;
             // 
             // BaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1337, 452);
+            this.Controls.Add(this.pictureBoxRecovery);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.progressBar1);
@@ -159,6 +171,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRecovery)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,6 +191,7 @@
         private System.Windows.Forms.Button Cancel;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ToolStripMenuItem восстановлениеИзображенияToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureBoxRecovery;
     }
 }
 

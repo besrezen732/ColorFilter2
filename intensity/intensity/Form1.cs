@@ -136,7 +136,7 @@ namespace intensity
         private void восстановлениеИзображенияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ImageRecovery imageRec = new ImageRecovery();
-            imageRec.RecoveryImage(ref baseImage, ref richTextBox1);
+            imageRec.RecoveryImage(ref baseImage, ref richTextBox1, ref pictureBoxRecovery);
         }
     }
 }
